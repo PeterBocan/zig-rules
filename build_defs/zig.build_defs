@@ -2,7 +2,7 @@
 
 Zig is very much a single binary distribution with a 
 """
-def zig_toolchain(name:str, url:str|dict='', version:str='' hashes:list=[], labels:list=[], visibility:list=["PUBLIC"]):
+def zig_toolchain(name:str, url:str|dict='', version:str='', hashes:list=[], labels:list=[], visibility:list=["PUBLIC"]):
     """
     Downloads Zig and exposes :<name>|zig, :<name>|fmt as entry points. 
 
