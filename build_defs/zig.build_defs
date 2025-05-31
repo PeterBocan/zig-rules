@@ -41,15 +41,23 @@ def zig_toolchain(name:str, url:str|dict='', version:str='' hashes:list=[], labe
         srcs = srcs,
         cmd = f'tar -xf $SRCS && mv {out_folder} $OUT',
         outs = [name],
+        entry_points = {
+            'zig': f'{name}/zig',
+        },
         binary = True,
         labels = labels,
         visibility = visibility,
         building_description = 'Installing...',
     )
 
-    for tool in ['compile', 'link', ]:
-        pass
-
+    for tool in ['compile', 'link', 'test' ]:
+        genrule(
+            name = f'{name}_{tool}',
+            binary = True,
+            output_is_complete = True,
+            tools = [f"{tc}|{tool}"],
+            visibility = visibility,
+        )
     return tc 
 
 
@@ -65,5 +73,12 @@ def zig_library(name:str, srcs:list, visibility:list):
     return genrule(
         name = name,
         srcs = srcs,
+        visibility = visibility,
+    )
+
+def zig_test(name:str, srcs:list, visibility:list):
+    return gentest(
+        name = name, 
+        srcs = srcs, 
         visibility = visibility,
     )
