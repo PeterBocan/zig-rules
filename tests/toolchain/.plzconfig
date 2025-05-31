@@ -1,0 +1,8 @@
+[Plugin "zig"]
+Target = //plugins:zig
+ZigTool = //tools:toolchain|zig
+
+[Parse]
+BuildFileName = BUILD_FILE
+BuildFileName = BUILD
+PreloadSubincludes = ///zig//build_defs:zig
