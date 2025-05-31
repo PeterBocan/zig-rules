@@ -38,7 +38,7 @@ def zig_toolchain(name:str, url:str|dict='', version:str='', hashes:list=[], lab
 
     tc = build_rule(
         name = name, 
-        srcs = srcs,
+        srcs = [download],
         cmd = f'tar -xf $SRCS && mv {out_folder} $OUT',
         outs = [name],
         entry_points = {
