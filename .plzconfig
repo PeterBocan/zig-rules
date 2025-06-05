@@ -13,3 +13,8 @@ Target = //plugin:zig
 
 [PluginDefinition]
 Name = zig
+
+[PluginConfig "zig_compiler"]
+DefaultValue = zig
+Help = A file path or a build tool for the zig tool to use.
+Inherit = true

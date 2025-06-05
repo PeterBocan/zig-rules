@@ -61,24 +61,44 @@ def zig_toolchain(name:str, url:str|dict='', version:str='', hashes:list=[], lab
     return tc 
 
 
-def zig_binary(name:str, srcs:list, visibility:list):     
-    return genrule(
-        name = name,
-        srcs = srcs, 
+def zig_binary(name:str, srcs:list, deps:list=[], visibility:list):     
+    # return genrule(
+    #     name = name,
+    #     srcs = srcs, 
+    #     visibility = visibility,
+    # )
+    pass
 
-        visibility = visibility,
-    )
+def zig_library(name:str, srcs:list, deps:list=[], labels:list=[], visibility:list):
+    """ Generates a Zig library
 
-def zig_library(name:str, srcs:list, visibility:list):
-    return genrule(
+    Args:
+        name (str): Name of the rule.
+        srcs (list): Zig source files to compile.
+        deps (list): A list of dependencies.
+        labels (list): Labels for this rule.
+        visibility (list): Visibility specification.
+    """
+    return build_rule(
         name = name,
         srcs = srcs,
+        cmd = f'',
+        tools = 'zig',
+        out = [name + '.a'],
+        deps = deps,
+        labels = labels,
         visibility = visibility,
+        requires = ['zig'],
     )
 
 def zig_test(name:str, srcs:list, visibility:list):
-    return gentest(
-        name = name, 
-        srcs = srcs, 
-        visibility = visibility,
-    )
+    # return gentest(
+    #     name = name, 
+    #     srcs = srcs, 
+    #     cmd = f'',
+    #     tools = 'zig',
+    #     out = [name + '.a'],
+    #     deps = deps,
+    #     visibility = visibility,
+    # )
+    pass
