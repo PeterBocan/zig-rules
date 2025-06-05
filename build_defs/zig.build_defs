@@ -84,17 +84,19 @@ def zig_library(name:str, srcs:list, deps:list=[], labels:list=[], visibility:li
         labels (list): Labels for this rule.
         visibility (list): Visibility specification.
     """
+
     return build_rule(
         name = name,
         srcs = srcs,
-        cmd = f'',
-        tools = 'zig',
-        out = [name + '.a'],
+        cmd = f'$TOOLS_ZIG build-obj $SRCS --name $OUT',
+        tools = {'zig': 'zig'},
+        outs = [name + '.a'],
         deps = deps,
         labels = labels,
         visibility = visibility,
         requires = ['zig'],
     )
+
 
 def zig_test(name:str, srcs:list, visibility:list):
     # return gentest(
