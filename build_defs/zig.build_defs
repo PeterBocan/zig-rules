@@ -54,15 +54,15 @@ def zig_toolchain(name:str, url:str|dict='', version:str='', hashes:list=[], lab
         visibility = visibility,
         building_description = 'Installing...',
     )
+    
+    genrule(
+        name = f'{}_{}',
+        binary = True, 
+        output_is_complete = True, 
+        tools = [f'{tc}|zig'],
+        visibility = visibility,
+    )
 
-    # for tool in ['compile', 'link', 'test' ]:
-    #     genrule(
-    #         name = f'{name}_{tool}',
-    #         binary = True,
-    #         output_is_complete = True,
-    #         tools = [f"{tc}|{tool}"],
-    #         visibility = visibility,
-    #     )
     return tc 
 
 

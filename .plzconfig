@@ -9,7 +9,8 @@
 ; version = 17.14.0
 
 [Plugin "zig"]
-Target = //plugin:zig
+Target = //plugins:zig
+ZigCompiler = //plugins:zig|zig 
 
 [PluginDefinition]
 Name = zig

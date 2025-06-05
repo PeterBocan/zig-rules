@@ -1,0 +1,6 @@
+
+zig_library(
+    name="test",
+    srcs=glob(["*.zig"]),
+    visibility=["PUBLIC"],
+)
