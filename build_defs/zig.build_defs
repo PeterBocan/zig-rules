@@ -21,7 +21,12 @@ def zig_toolchain(name:str, url:str|dict='', version:str='', hashes:list=[], lab
         fail("Either version or url should be provided for both")
     
     if version:
-        sdk_url = f'https://ziglang.org/download/{version}/zig-{CONFIG.HOSTARCH}-{CONFIG.HOSTOS}-{version}.tar.xz'
+        # Zig calls it "macos" instead of "darwin", so some manual work is necessary
+        # TODO: fix this
+        arch = 'aarch64'
+        os = 'macos'
+
+        sdk_url = f'https://ziglang.org/download/{version}/zig-{arch}-{os}-{version}.tar.xz'
     else:
         # TODO: finish this
         sdk_url = url if isinstance(url, str) else url[f'{CONFIG.HOSTARCH}-{CONFIG.HOSTOS}']
