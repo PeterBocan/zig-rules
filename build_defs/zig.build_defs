@@ -56,7 +56,7 @@ def zig_toolchain(name:str, url:str|dict='', version:str='', hashes:list=[], lab
     )
     
     genrule(
-        name = f'{}_{}',
+        name = f'{name}|zig',
         binary = True, 
         output_is_complete = True, 
         tools = [f'{tc}|zig'],
