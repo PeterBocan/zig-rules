@@ -20,12 +20,12 @@ def zig_toolchain(name:str, url:str|dict='', version:str='', hashes:list=[], lab
     if url and version: 
         fail("Either version or url should be provided for both")
     
+    arch = 'aarch64'
+    os = 'macos'
+
     if version:
         # Zig calls it "macos" instead of "darwin", so some manual work is necessary
         # TODO: fix this
-        arch = 'aarch64'
-        os = 'macos'
-
         sdk_url = f'https://ziglang.org/download/{version}/zig-{arch}-{os}-{version}.tar.xz'
     else:
         # TODO: finish this
@@ -39,7 +39,7 @@ def zig_toolchain(name:str, url:str|dict='', version:str='', hashes:list=[], lab
         hashes = hashes,
     )
 
-    out_folder = f'zig-{CONFIG.HOSTARCH}-{CONFIG.HOSTOS}-{version}'
+    out_folder = f'zig-{arch}-{os}-{version}'
 
     tc = build_rule(
         name = name, 
