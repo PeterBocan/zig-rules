@@ -176,10 +176,10 @@ def _binary_cmds(name:str, compiler_flags:list, linker_flags:list, debug_flags:l
     link_flags = ' '.join(linker_flags)
     comp_flags = ' '.join(compiler_flags)
     dbg_flags  = ' '.join(debug_flags)
-
+    find_libs = 'LIBS=$(find . -name "*.a" -or -name "*.o")'
     cmds = {
-        'dbg': f'$TOOLS_ZIG build-exe {dbg_flags} {link_flags} --name {name}', 
-        'opt': f'$TOOLS_ZIG build-exe {comp_flags} {link_flags} --name {name}',
+        'dbg': f'{find_libs} && $TOOLS_ZIG build-exe {dbg_flags} {link_flags} $LIBS --name {name}', 
+        'opt': f'{find_libs} && $TOOLS_ZIG build-exe {comp_flags} {link_flags} $LIBS --name {name}',
     }
     return cmds, tools
 
