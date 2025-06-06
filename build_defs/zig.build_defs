@@ -96,6 +96,9 @@ def zig_binary(name:str, srcs:list, deps:list=[], labels:list=[], compiler_flags
         debug_flags (list): A list of debug flags to pass to the compiler.
         visibility (list): Visibility specification.
     """
+    if CONFIG.ZIG.DEFAULT_LINKER_FLAGS: 
+        linker_flags += [CONFIG.ZIG.DEFAULT_LINKER_FLAGS]
+       
     cmds, tools = _binary_cmds(name, compiler_flags, linker_flags, debug_flags)
     if srcs:
         lib_rule = zig_library(
