@@ -130,6 +130,7 @@ def zig_library(name:str, srcs:list, deps:list=[], labels:list=[], compiler_flag
 
     return build_rule(
         name = name, 
+        srcs = srcs,
         outs = [name],
         deps = deps,
         visibility = visibility,
