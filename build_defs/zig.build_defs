@@ -73,7 +73,7 @@ def zig_toolchain(name:str, url:str|dict='', version:str='', hashes:list=[], lab
     return tc 
 
 
-def zig_binary(name:str, srcs:list, deps:list=[], visibility:list):
+def zig_binary(name:str, srcs:list, deps:list=[], labels:list=[], visibility:list):
     """ Generates a Zig binary
 
     Args:
