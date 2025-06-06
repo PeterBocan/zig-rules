@@ -19,3 +19,24 @@ Name = zig
 DefaultValue = zig
 Help = A file path or a build tool for the zig tool to use.
 Inherit = true
+
+[PluginConfig "default_opt_flags"]
+ConfigKey = DefaultOptFlags
+DefaultValue = -O ReleaseFast
+Inherit = true 
+Help = The default compilation flags to be passed into Zig compiler. 
+
+[PluginConfig "default_linker_flags"]
+ConfigKey = DefaultLinkerFlags
+DefaultValue = 
+Help = Default linker flags to pass into Zig compiler.
+Repeatable = true
+Inherit = true
+
+[PluginConfig "default_dbg_flags"]
+ConfigKey = DefaultDebugFlags
+DefaultValue = -O Debug
+Repeatable = true
+Help = Default debug flags to pass to Zig compiler.
+Inherit = true 
+
