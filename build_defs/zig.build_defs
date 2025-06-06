@@ -94,6 +94,7 @@ def zig_binary(name:str, srcs:list, deps:list=[], labels:list=[], compiler_flags
             name = f'_{name}#lib',
             srcs = srcs, 
             deps = deps,
+            visibility = visibility,
         )
         deps += [lib_rule]
 
