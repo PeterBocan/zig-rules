@@ -88,7 +88,7 @@ def zig_binary(name:str, srcs:list, deps:list=[], labels:list=[], compiler_flags
         debug_flags (list): A list of debug flags to pass to the compiler.
         visibility (list): Visibility specification.
     """
-    cmds, tools = _binary_cmds(compiler_flags, linker_flags, debug_flags)
+    cmds, tools = _binary_cmds(name, compiler_flags, linker_flags, debug_flags)
     if srcs:
         lib_rule = zig_library(
             name = f'_{name}#lib',
@@ -114,7 +114,7 @@ def zig_binary(name:str, srcs:list, deps:list=[], labels:list=[], compiler_flags
 
 def zig_library(name:str, srcs:list, deps:list=[], labels:list=[], compiler_flags:list=[],
                 linker_flags:list=[], debug_flags:list=[], visibility:list):
-    """ Generates a Zig library
+    """ Generates a Zig library.
 
     Args:
         name (str): Name of the rule.
@@ -143,19 +143,6 @@ def zig_library(name:str, srcs:list, deps:list=[], labels:list=[], compiler_flag
         needs_transitive_deps = True,
         requires = ['zig'], 
     ) 
-
-    # return genrule(
-    #     name = name,
-    #     srcs = srcs,
-    #     cmd = f'$TOOLS_ZIG build-lib $SRCS --name {name}',
-    #     tools = {'zig': CONFIG.ZIG.ZIG_COMPILER },
-    #     outs = ['lib' + name + '.a'],
-    #     deps = deps,
-    #     labels = labels,
-    #     visibility = visibility,
-    #     requires = ['zig'],
-    # )
-
 
 def zig_test(name:str, srcs:list, visibility:list):
     # return gentest(
@@ -190,8 +177,8 @@ def _binary_cmds(name:str, compiler_flags:list, linker_flags:list, debug_flags:l
     dbg_flags  = ' '.join(debug_flags)
 
     cmds = {
-        'dbg': f'$TOOLS_ZIG build-exe {dbg_flags} --name {name}', 
-        'opt': f'$TOOLS_ZIG build-exe {comp_flags} --name {name}',
+        'dbg': f'$TOOLS_ZIG build-exe {dbg_flags} {link_flags} --name {name}', 
+        'opt': f'$TOOLS_ZIG build-exe {comp_flags} {link_flags} --name {name}',
     }
     return cmds, tools
 
