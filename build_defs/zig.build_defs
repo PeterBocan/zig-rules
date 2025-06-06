@@ -175,8 +175,8 @@ def _library_cmds(name:str, compiler_flags:list, linker_flags:list, debug_flags:
     dbg_flags  = ' '.join(debug_flags)
 
     cmds = {
-        'dbg': f'$TOOLS_ZIG build-lib {dbg_flags} --name {name}', 
-        'opt': f'$TOOLS_ZIG build-lib {comp_flags} --name {name}',
+        'dbg': f'$TOOLS_ZIG build-lib {dbg_flags} $SRCS --name {name}', 
+        'opt': f'$TOOLS_ZIG build-lib {comp_flags} $SRCS --name {name}',
     }
     return cmds, tools
 
