@@ -1,0 +1,6 @@
+
+zig_binary(
+    name = "testbin",
+    srcs = glob(["*.zig"]),
+    visibility = ["PUBLIC"],
+)
