@@ -96,7 +96,7 @@ def zig_library(name:str, srcs:list, deps:list=[], labels:list=[], visibility:li
         name = name,
         srcs = srcs,
         cmd = f'$TOOLS_ZIG build-obj $SRCS --name $OUT',
-        tools = {'zig': 'zig'},
+        tools = {'zig': CONFIG.ZIG.ZIG_COMPILER },
         outs = [name + '.a'],
         deps = deps,
         labels = labels,
