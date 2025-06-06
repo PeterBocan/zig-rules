@@ -95,7 +95,7 @@ def zig_library(name:str, srcs:list, deps:list=[], labels:list=[], visibility:li
     return genrule(
         name = name,
         srcs = srcs,
-        cmd = f'$TOOLS_ZIG build-obj $SRCS --name $OUT',
+        cmd = f'$TOOLS_ZIG build-obj $SRCS --name {name}',
         tools = {'zig': CONFIG.ZIG.ZIG_COMPILER },
         outs = [name + '.a'],
         deps = deps,
