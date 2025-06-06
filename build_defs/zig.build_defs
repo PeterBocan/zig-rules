@@ -126,7 +126,7 @@ def zig_library(name:str, srcs:list, deps:list=[], labels:list=[], compiler_flag
         debug_flags (list): A list of debug flags to pass to the compiler.
         visibility (list): Visibility specification.
     """
-    cmd, tools = _library_cmds(name, compiler_flags, linker_flags, debug_flags)
+    cmds, tools = _library_cmds(name, compiler_flags, linker_flags, debug_flags)
 
     return build_rule(
         name = name, 
