@@ -92,7 +92,7 @@ def zig_library(name:str, srcs:list, deps:list=[], labels:list=[], visibility:li
         visibility (list): Visibility specification.
     """
 
-    return build_rule(
+    return genrule(
         name = name,
         srcs = srcs,
         cmd = f'$TOOLS_ZIG build-obj $SRCS --name $OUT',

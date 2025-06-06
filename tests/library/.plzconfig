@@ -1,7 +1,7 @@
 
 [Plugin "zig"]
 Target = //plugins:zig
-; ZigTool = //tools:toolchain|zig
+ZigCompiler = //tools:toolchain|zig
 
 [Parse]
 BuildFileName = BUILD_FILE
