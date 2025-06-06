@@ -48,11 +48,26 @@ def zig_toolchain(name:str, url:str|dict='', version:str='', hashes:list=[], lab
         outs = [name],
         entry_points = {
             'zig': f'{name}/zig',
+            'stdlib': f'{name}/lib',
         },
         binary = True,
         labels = labels,
         visibility = visibility,
         building_description = 'Installing...',
+    )
+
+    export_file(
+        name = f"{name}_compiler",
+        src = f"{tc}|zig",
+        visibility = visibility,
+        binary = True,
+    )
+
+    filegroup(
+        name = f"{name}_stdlib",
+        srcs = [f"{tc}|stdlib"],
+        output_is_complete = True, 
+        visibility = visibility,
     )
 
     return tc 
