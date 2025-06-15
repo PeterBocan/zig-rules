@@ -177,7 +177,7 @@ def zig_test(name:str, srcs:list, deps:list=[], data:list=[], flaky:bool|int=0, 
     return gentest(
         name = name, 
         srcs = srcs, 
-        cmd = cmd,
+        test_cmd = cmd,
         tools = 'zig',
         outs = [f'{name}.results'],
         deps = deps,
