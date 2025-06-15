@@ -160,7 +160,8 @@ def zig_library(name:str, srcs:list, deps:list=[], labels:list=[], compiler_flag
         requires = ['zig'], 
     ) 
 
-def zig_test(name:str, srcs:list, deps:list=[], data:list=[], flaky:bool|int=0, visibility:list):
+def zig_test(name:str, srcs:list, deps:list=[], data:list=[], sandbox:bool=False, timeout:int=0,
+    flaky:bool|int=0, visibility:list):
     """ Create a Zig test.
 
     Args:
@@ -168,6 +169,10 @@ def zig_test(name:str, srcs:list, deps:list=[], data:list=[], flaky:bool|int=0, 
         srcs (list): Zig source files to run the tests.
         deps (list): Dependencies for a test.
         data (list): Data necessary for the tests.
+        sandbox (bool): If True, the test is run within a sandbox that restricts some cgroups 
+                        including networking, process, IPC, etc. Only has an effect on Linux. 
+                        If this is on by default then tests can opt out by setting this to False.
+        timeout (int): Length of time in seconds to allow the test to run for before killing it.
         flaky (bool|int): Marking the test as flaky. If marked, it will be retried automatically.
         visibility (list): Visibility specification.
     """
@@ -178,12 +183,15 @@ def zig_test(name:str, srcs:list, deps:list=[], data:list=[], flaky:bool|int=0, 
         name = name, 
         srcs = srcs, 
         test_cmd = cmd,
-        tools = 'zig',
+        test_tools = tools,
         outs = [f'{name}.results'],
         deps = deps,
         flaky = flaky,
+        sandbox = sandbox,
+        
         data = data,
         visibility = visibility,
+        requires = ['zig'],
     )
     
 
