@@ -1,7 +1,7 @@
 
 zig_library(
     name = "lib",
-    srcs = glob(["lib.zig"]),
+    srcs = ["lib.zig"],
     visibility = ["PUBLIC"],
 )
 

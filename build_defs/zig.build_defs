@@ -177,7 +177,7 @@ def zig_test(name:str, srcs:list, deps:list=[], data:list=[], sandbox:bool=False
         visibility (list): Visibility specification.
     """
     tools = { 'zig': CONFIG.ZIG.ZIG_COMPILER }
-    cmd = '$TOOLS_ZIG test $SRCS'
+    cmd = f'$TOOLS_ZIG test $SRCS > {name}.results'
 
     return gentest(
         name = name, 
