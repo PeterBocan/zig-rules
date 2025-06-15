@@ -171,11 +171,13 @@ def zig_test(name:str, srcs:list, deps:list=[], data:list=[], flaky:bool|int=0, 
         flaky (bool|int): Marking the test as flaky. If marked, it will be retried automatically.
         visibility (list): Visibility specification.
     """
+    tools = { 'zig': CONFIG.ZIG.ZIG_COMPILER }
+    cmd = '$TOOLS_ZIG test $SRCS'
 
     return gentest(
         name = name, 
         srcs = srcs, 
-        cmd = f'',
+        cmd = cmd,
         tools = 'zig',
         out = [name + '.a'],
         deps = deps,
