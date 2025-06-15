@@ -1,0 +1,13 @@
+
+zig_library(
+    name = "lib",
+    srcs = glob(["lib.zig"]),
+    visibility = ["PUBLIC"],
+)
+
+zig_test(
+    name = "test",
+    srcs = ["lib_test.zig"],
+    deps = [ ":lib" ],
+    visibility = ["PUBLIC"],
+)
