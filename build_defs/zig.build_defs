@@ -26,8 +26,18 @@ def zig_toolchain(name:str, url:str|dict='', version:str='', hashes:list=[], lab
 
     # Zig calls it "macos" instead of "darwin", so some manual work here is necessary.
     # TODO: this might be a bit more precise handling.
-    os = 'macos' if CONFIG.OS == 'darwin' else CONFIG.OS
-    arch = 'aarch64' if CONFIG.ARCH == 'arm64' else CONFIG.ARCH 
+    if CONFIG.OS == 'darwin':
+        os = 'macos'  
+    else:
+        os = CONFIG.OS
+
+    if CONFIG.ARCH == 'arm64':
+        arch = 'aarch64'
+    elif CONFIG.ARCH == 'amd64':
+        arch = 'x86_64'
+    else:
+        # fallback to the default mapping
+        arch = CONFIG.ARCH 
     
     if version:
         sdk_url = f'https://ziglang.org/download/{version}/zig-{arch}-{os}-{version}.tar.xz'
