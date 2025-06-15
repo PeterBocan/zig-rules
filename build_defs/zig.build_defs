@@ -160,17 +160,30 @@ def zig_library(name:str, srcs:list, deps:list=[], labels:list=[], compiler_flag
         requires = ['zig'], 
     ) 
 
-def zig_test(name:str, srcs:list, visibility:list):
-    # return gentest(
-    #     name = name, 
-    #     srcs = srcs, 
-    #     cmd = f'',
-    #     tools = 'zig',
-    #     out = [name + '.a'],
-    #     deps = deps,
-    #     visibility = visibility,
-    # )
-    pass
+def zig_test(name:str, srcs:list, deps:list=[], data:list=[], flaky:bool|int=0, visibility:list):
+    """ Create a Zig test.
+
+    Args:
+        name (str): Name of the rule.
+        srcs (list): Zig source files to run the tests.
+        deps (list): Dependencies for a test.
+        data (list): Data necessary for the tests.
+        flaky (bool|int): Marking the test as flaky. If marked, it will be retried automatically.
+        visibility (list): Visibility specification.
+    """
+
+    return gentest(
+        name = name, 
+        srcs = srcs, 
+        cmd = f'',
+        tools = 'zig',
+        out = [name + '.a'],
+        deps = deps,
+        flaky = flaky,
+        data = data,
+        visibility = visibility,
+    )
+    
 
 def _library_cmds(name:str, compiler_flags:list, linker_flags:list, debug_flags:list):
     tools = { 'zig': CONFIG.ZIG.ZIG_COMPILER }
